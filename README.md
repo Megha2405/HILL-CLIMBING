@@ -1,6 +1,6 @@
 <h1>ExpNo 5 : Implement Simple Hill Climbing Algorithm</h1> 
-<h3>Name:             </h3>
-<h3>Register Number:             </h3>
+<h3>Name:Megha S         </h3>
+<h3>Register Number:212224230157         </h3>
 <H3>Aim:</H3>
 <p>Implement Simple Hill Climbing Algorithm and Generate a String by Mutating a Single Character at each iteration </p>
 <h2> Theory: </h2>
@@ -59,3 +59,65 @@ Score: 1  Solution :  Artificial Intelligencf<br>
 Score: 1  Solution :  Artificial Intelligencf<br>
 Score: 1  Solution :  Artificial Intelligencf<br>
 Score: 0  Solution :  Artificial Intelligence<br>
+
+<pre>
+ <code>
+  import random
+import string
+
+# characters allowed
+CHAR_SET = string.ascii_letters + " "
+
+# fitness function (lower is better, 0 = goal)
+def fitness(current, target):
+    score = 0
+    for c, t in zip(current, target):
+        score += abs(ord(c) - ord(t))
+    return score
+
+# mutate one character randomly
+def mutate_string(current):
+    index = random.randint(0, len(current) - 1)
+    new_char = random.choice(CHAR_SET)
+    new_string = list(current)
+    new_string[index] = new_char
+    return "".join(new_string)
+
+# hill climbing algorithm
+def hill_climbing(target):
+    # Step 1: random initial string
+    current = "".join(random.choice(CHAR_SET) for _ in range(len(target)))
+    current_score = fitness(current, target)
+
+    print("Target:", target)
+
+    while current_score > 0:
+        new = mutate_string(current)
+        new_score = fitness(new, target)
+
+        # accept only better solution
+        if new_score <= current_score:
+            current = new
+            current_score = new_score
+            print("Score:", current_score, "Solution:", current)
+
+    print("\nFinal Solution Reached!")
+
+# -------- Run --------
+target_string = input("Enter target string: ")
+hill_climbing(target_string)
+ </code>
+</pre>
+
+<Hr>
+<h3>
+ OUTPUT:
+</h3>
+<img width="913" height="739" alt="image" src="https://github.com/user-attachments/assets/06959b2d-834d-4505-8974-834c86151b33" />
+
+<Hr>
+<h3>
+ RESULT:
+</h3>
+Hence, the solution for the given AI problem is found.
+
